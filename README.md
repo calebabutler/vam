@@ -19,3 +19,5 @@ Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But a
     cd vam
     # make the package
     makepkg -si
+    # do this command if you're moving to vam from an existing aur helper:
+    vam -d $(pacman -Qm | awk '{print $1}')
