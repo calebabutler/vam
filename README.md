@@ -1,5 +1,5 @@
 # vam
-Vam is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet connection. It has three options:
+Vam is the simplest aur helper ever made. It is 55 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet connection. It has three options:
 
     vam -d # -> downloads aur packages and their aur dependencies
     vam -u # -> downloads aur updates and notifies the user of them
@@ -9,7 +9,7 @@ Vam requires bash, git, jshon, curl, and gnu coreutils.
 
 # Why use this instead of cower (auracle, or any other download-only aur helper)?
 
-Cower/Auracle doesn't use git but tarballs, which has been deprecated since AUR 4. But also all of these aur helpers (in my opinion) just has too many gosh dang features. Cower is 1000 lines of C code. Why? I rewrote the functionality I used in 52 lines.
+Cower/Auracle doesn't use git but tarballs, which has been deprecated since AUR 4. But also all of these aur helpers (in my opinion) just has too many gosh dang features. Cower is 1000 lines of C code. Why? I rewrote the functionality I used in 55 lines.
 
 # How do you download it?
 
