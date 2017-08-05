@@ -1,9 +1,9 @@
-# nam
-Nam is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet. It has three options:
+# yim
+Yim is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet. It has three options:
 
-    nam -d # -> downloads aur packages and their aur dependencies
-    nam -u # -> downloads aur updates and notifies the user
-    nam -s # -> searches the aur through aur names and descriptions
+    yim -d # -> downloads aur packages and their aur dependencies
+    yim -u # -> downloads aur updates and notifies the user
+    yim -s # -> searches the aur through aur names and descriptions
 
 Nam requires bash, git, jshon, and curl.
 
@@ -13,7 +13,7 @@ Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But a
 
 # How do you download it?
 
-Before you read how to download it, I recommend first understanding the entire program top to bottom. The explanation is right below here. After reading how it works, I recommend making your own nam-type aur helper with all of the features you need. If you're too busy for that:
+Before you read how to download it, I recommend first understanding the entire program top to bottom. The explanation is right below here. After reading how it works, I recommend making your own yim-type aur helper with all of the features you need. If that sounds stupid:
 
     # Download nam's aur package with git
     git clone https://aur.archlinux.org/nam.git
