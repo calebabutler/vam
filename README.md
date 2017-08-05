@@ -20,4 +20,4 @@ Before you read how to download it, I recommend first understanding the entire p
     # Go into the nam directory
     cd nam-master
     # make the package
-    makepkg -sic
+    makepkg -si
