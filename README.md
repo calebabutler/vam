@@ -13,11 +13,9 @@ Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But a
 
 # How do you download it?
 
-Before you read how to download it, I recommend first understanding the entire program top to bottom. The explanation is right below here. After reading how it works, I recommend making your own yam-type aur helper with all of the features you need. If that sounds stupid:
-
-    # Download nam's aur package with git
+    # Download yam's aur package with git
     git clone https://aur.archlinux.org/yam.git
-    # Go into the nam directory
-    cd yam-master
+    # Go into the yam directory
+    cd yam
     # make the package
     makepkg -si
