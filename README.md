@@ -9,7 +9,7 @@ Yam requires bash, git, jshon, and curl.
 
 # Why use this instead of cower?
 
-Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But also cower just has too many gosh dang features. It is 1000 lines of C code. Why? When you can just rewrite the functionality you use in 52 lines. Plus it's also 5 letters instead of 3. If you're not convinced yet you're a lost cause.
+Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But also cower just has too many gosh dang features. It is 1000 lines of C code. Why? I rewrote the functionality I used in 52 lines. Plus it's also 3 letters instead of 5. If you're not convinced yet you're a lost cause.
 
 # How do you download it?
 
