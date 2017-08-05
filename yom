@@ -48,5 +48,5 @@ elif [[ $1 == "-u" ]]; then
 elif [[ $1 == "-s" ]]; then
   search $(echo $@ | cut -d' ' -f2-)
 else
-  echo "yim aur helper: -d = download, -u = update, -s = search"
+  echo "yom aur helper: -d = download, -u = update, -s = search"
 fi
