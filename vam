@@ -27,7 +27,7 @@ download() {
 
 update() {
   cd "$aurdir" || exit
-  for dir in $(ls); do
+  for dir in ./*; do
     cd "$dir" || exit
     if [[ $(git pull 2> /dev/null) != "Already up-to-date." ]]; then
       echo ":: $dir needs to be reinstalled in $aurdir/$dir"
