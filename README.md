@@ -13,9 +13,9 @@ Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But a
 
 # How do you download it?
 
-    # Download yam's aur package with git
+    # Download vam's aur package with git
     git clone https://aur.archlinux.org/vam.git
-    # Go into the yam directory
+    # Go into the vam directory
     cd vam
     # make the package
     makepkg -si
