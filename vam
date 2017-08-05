@@ -1,12 +1,12 @@
 #!/bin/bash
 aurdir="$HOME/.aur"
 mkdir -p $aurdir
-cd $aurdir
 
 download() {
   echo "note: only folders in $aurdir get updated."
   local packages=$(pacman -Sl)
   local depends
+  cd $aurdir
   for arg in $@; do
     depends=`curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg"`
     if [[ $(echo $depends | jshon -e results) != "[]" ]]; then
@@ -17,8 +17,7 @@ download() {
         for dep in $depends; do
           echo $packages | grep $dep > /dev/null
           if [[ $(echo $?) == 1 ]]; then
-            git clone https://aur.archlinux.org/$dep.git 2> /dev/null
-            echo ":: $dep downloaded to $aurdir/$dep"
+            download $dep
           fi
         done
       fi
@@ -27,6 +26,7 @@ download() {
 }
 
 update() {
+  cd $aurdir
   for dir in $(ls); do
     cd $dir
     if [[ $(git pull) != "Already up-to-date." ]]; then
