@@ -3,7 +3,7 @@ Nam is the simplest aur helper ever made. It is 52 lines of source code. That is
 
     nam -d # -> downloads aur packages and their aur dependencies
     nam -u # -> downloads aur updates and notifies the user
-    nam -s # -> searches the aur through aur names and descriptions (but only gives you the names of the packages)
+    nam -s # -> searches the aur through aur names and descriptions
 
 Nam requires bash, git, jshon, and curl.
 
