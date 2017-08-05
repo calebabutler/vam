@@ -5,7 +5,7 @@ Yom is the simplest aur helper ever made. It is 52 lines of source code. That is
     yom -u # -> downloads aur updates and notifies the user
     yom -s # -> searches the aur through aur names and descriptions
 
-Nam requires bash, git, jshon, and curl.
+Yom requires bash, git, jshon, and curl.
 
 # Why use this instead of cower?
 
