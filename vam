@@ -3,7 +3,6 @@ aurdir="$HOME/.aur"
 mkdir -p $aurdir
 
 download() {
-  echo "note: only folders in $aurdir get updated."
   local packages=$(pacman -Sl)
   local depends
   cd $aurdir
@@ -42,6 +41,7 @@ search() {
 }
 
 if [[ $1 == "-d" ]]; then
+  echo "note: only folders in $aurdir get updated."
   download $(echo $@ | cut -d' ' -f2-)
 elif [[ $1 == "-u" ]]; then
   update
