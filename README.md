@@ -1,2 +1,2 @@
 # nam
-The Simplest Aur Manager Ever Made
+the simplest aur manager ever made
