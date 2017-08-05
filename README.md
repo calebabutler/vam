@@ -2,10 +2,10 @@
 Yam is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet connection. It has three options:
 
     yam -d # -> downloads aur packages and their aur dependencies
-    yam -u # -> downloads aur updates and notifies the user
+    yam -u # -> downloads aur updates and notifies the user of them
     yam -s # -> searches the aur through aur names and descriptions
 
-Yam requires bash, git, jshon, and curl.
+Yam requires bash, git, jshon, curl, and gnu coreutils.
 
 # Why use this instead of cower?
 
