@@ -1,11 +1,11 @@
-# yam
-Yam is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet connection. It has three options:
+# vam
+Vam is the simplest aur helper ever made. It is 52 lines of source code. That is so short, that on a computer with no internet connection, you can hand type the entire source code in less than 5 minutes. Sadly the program is useless on a computer with no internet connection. It has three options:
 
-    yam -d # -> downloads aur packages and their aur dependencies
-    yam -u # -> downloads aur updates and notifies the user of them
-    yam -s # -> searches the aur through aur names and descriptions
+    vam -d # -> downloads aur packages and their aur dependencies
+    vam -u # -> downloads aur updates and notifies the user of them
+    vam -s # -> searches the aur through aur names and descriptions
 
-Yam requires bash, git, jshon, curl, and gnu coreutils.
+Vam requires bash, git, jshon, curl, and gnu coreutils.
 
 # Why use this instead of cower?
 
@@ -14,8 +14,8 @@ Cower doesn't use git but tarballs, which has been deprecated since AUR 4. But a
 # How do you download it?
 
     # Download yam's aur package with git
-    git clone https://aur.archlinux.org/yam.git
+    git clone https://aur.archlinux.org/vam.git
     # Go into the yam directory
-    cd yam
+    cd vam
     # make the package
     makepkg -si
