@@ -1,17 +1,18 @@
 #!/bin/bash
-aurdir="$HOME/.aur"
-mkdir -p "$aurdir"
+source ~/.config/vam.conf
+LANG=C
+[ -d "$aurdir" ] || mkdir -p "$aurdir" 
 
 download() {
   local packages
   local depends
-  packages=$(pacman -Sl)
+  packages=$(pacman -Sl|grep -v $localrepo)
   cd "$aurdir" || exit
   for arg in "$@"; do
     depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
     if [[ $(echo "$depends" | jshon -e results) != "[]" ]]; then
       git clone https://aur.archlinux.org/"$arg".git 2> /dev/null
-      echo ":: $arg downloaded $aurdir/$arg"
+      echo ":: $arg downloaded to $aurdir/$arg"
       if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends) != "[]" ]]; then
         depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u)
         for dep in $depends; do
@@ -20,7 +21,7 @@ download() {
             download "$dep"
           fi
         done
-      fi
+	fi
     fi
   done
 }
