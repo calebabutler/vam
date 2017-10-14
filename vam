@@ -9,14 +9,9 @@ download() {
   packages=$(pacman -Sl|grep -v $localrepo)
   cd "$aurdir" || exit
   for arg in "$@"; do
-    depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
-    if [[ $(echo "$depends" | jshon -e results) != "[]" ]]; then
-	if [[ "$arg" != "$(echo "$depends" | jshon -e results |grep -Po '"PackageBase":.*?[^\\],' | cut -f 4 -d \" | sort -u)" ]]; then
-	    echo "please rerun with the package base as argument"
-	    exit
-	fi
-    else
-	git clone https://aur.archlinux.org/"$arg".git 2> /dev/null
+      depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
+      arg="$(echo "$depends" | jshon -e results |grep -Po '"PackageBase":.*?[^\\],' | cut -f 4 -d \" | sort -u)"
+      git clone https://aur.archlinux.org/"$arg".git 2> /dev/null
 	echo ":: $arg downloaded to $aurdir/$arg"
         if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends) != "[]" ]]; then
 	depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u)
@@ -27,7 +22,6 @@ download() {
 	    fi
 	done
 	fi
-    fi
   done
 }
 
