@@ -10,12 +10,12 @@ download() {
   cd "$aurdir" || exit
   for arg in "$@"; do
       depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
-      arg=$(echo "$depends" | jshon -e results |grep -Po '"PackageBase":.*?[^\\],' | cut -f 4 -d \" | sort -u)
+      arg=$(echo "$depends" | jshon -e results 2>/dev/null |grep -Po '"PackageBase":.*?[^\\],' | cut -f 4 -d \" | sort -u)
       git clone https://aur.archlinux.org/"$arg".git 2> /dev/null
       echo ":: $arg downloaded to $aurdir/$arg"
-      if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends 2> /dev/null) > 0 ]]; then
-	  depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u | sed 's#<.*##' |sed 's#>.*##')
-	  makedepends=$(echo "$depends" | jshon -e results -e 0 -e MakeDepends -a -u | sed 's#<.*##' |sed 's#>.*##')
+      if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends 2>/dev/null) != "[]" ]]; then
+	  depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
+	  makedepends=$(echo "$makedepends" | jshon -e results -e 0 -e MakeDepends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
 	  for dep in $depends $makedepends; do
 	      echo "$packages" | grep "$dep" > /dev/null
 	      if [[ "$?" == 1 ]]; then
