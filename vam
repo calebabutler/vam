@@ -15,7 +15,7 @@ download() {
       echo ":: $arg downloaded to $aurdir/$arg"
       if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends 2>/dev/null) != "[]" ]]; then
 	  depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
-	  makedepends=$(echo "$makedepends" | jshon -e results -e 0 -e MakeDepends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
+	  makedepends=$(echo "$depends" | jshon -e results -e 0 -e MakeDepends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
 	  for dep in $depends $makedepends; do
 	      echo "$packages" | grep "$dep" > /dev/null
 	      if [[ "$?" == 1 ]]; then
