@@ -1,55 +1,56 @@
 #!/bin/bash
-aurdir="$HOME/.aur"
-mkdir -p "$aurdir"
+source ~/.config/vam.conf
+LANG=C
+[ -d "$aurdir" ] || mkdir -p "$aurdir" 
 
 download() {
   local packages
   local depends
-  packages=$(pacman -Sl)
+  packages=$(pacman -Sl|grep -v $localrepo)
   cd "$aurdir" || exit
   for arg in "$@"; do
-    depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
-    if [[ $(echo "$depends" | jshon -e results) != "[]" ]]; then
+      depends=$(curl -sg "https://aur.archlinux.org/rpc/?v=5&type=info&arg[]=$arg")
+      arg=$(echo "$depends" | jshon -e results 2>/dev/null |grep -Po '"PackageBase":.*?[^\\],' | cut -f 4 -d \" | sort -u)
       git clone https://aur.archlinux.org/"$arg".git 2> /dev/null
-      echo ":: $arg downloaded $aurdir/$arg"
-      if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends) != "[]" ]]; then
-        depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u)
-        for dep in $depends; do
-          echo "$packages" | grep "$dep" > /dev/null
-          if [[ "$?" == 1 ]]; then
-            download "$dep"
-          fi
-        done
+      echo ":: $arg downloaded to $aurdir/$arg"
+      if [[ $(echo "$depends" | jshon -e results -e 0 -e Depends 2>/dev/null) != "[]" ]]; then
+	  depends=$(echo "$depends" | jshon -e results -e 0 -e Depends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
+	  makedepends=$(echo "$depends" | jshon -e results -e 0 -e MakeDepends -a -u 2>/dev/null | sed 's#<.*##' |sed 's#>.*##'|uniq)
+	  for dep in $depends $makedepends; do
+	      echo "$packages" | grep "$dep" > /dev/null
+	      if [[ "$?" == 1 ]]; then
+		  download "$dep"
+	      fi
+	  done
       fi
-    fi
   done
 }
 
 update() {
-  cd "$aurdir" || exit
-  for dir in ./*; do
-    cd "$dir" || exit
-    if [[ $(git pull 2> /dev/null) != "Already up-to-date." ]]; then
-      echo ":: $dir needs to be reinstalled in $aurdir/$dir"
-    fi
-    cd ..
-  done
+    cd "$aurdir" || exit
+    for dir in ./*; do
+	cd "$dir" || exit
+	if [[ $(git pull 2> /dev/null) != "Already up-to-date." ]]; then
+	    echo ":: $dir needs to be reinstalled in $aurdir/$dir"
+	fi
+	cd ..
+    done
 }
 
 search() {
-  curl -s "https://aur.archlinux.org/rpc/?v=5&type=search&arg=$1" \
-           | jshon -e results -a -e Name -u
+    curl -s "https://aur.archlinux.org/rpc/?v=5&type=search&arg=$1" \
+        | jshon -e results -a -e Name -u
 }
 
 if [[ "$1" == "-d" ]]; then
-  echo "note: only folders in $aurdir get updated."
-  shift
-  download "$@"
+    echo "note: only folders in $aurdir get updated."
+    shift
+    download "$@"
 elif [[ "$1" == "-u" ]]; then
-  update
+    update
 elif [[ "$1" == "-s" ]]; then
-  shift
-  search "$@"
+    shift
+    search "$@"
 else
-  echo "vam aur helper: -d = download, -u = update, -s = search"
+    echo "vam aur helper: -d = download, -u = update, -s = search"
 fi
